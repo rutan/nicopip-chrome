@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "nicopinp",
+  "version": "0.1.0",
+  "description": "【非公式】ニコニコ動画をPinPで再生します",
+  "icons": {},
+  "content_scripts": [
+    {
+      "matches": ["https://www.nicovideo.jp/watch/*"],
+      "js": ["js/contentScript.js"]
+    }
+  ]
+}
