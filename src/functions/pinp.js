@@ -1,3 +1,4 @@
+let isHidden = false;
 let canvas;
 let context;
 let video;
@@ -5,6 +6,14 @@ let uid = 0;
 
 export function initPinP() {
   if (canvas) return;
+
+  document.addEventListener(
+    'visibilitychange',
+    () => {
+      isHidden = document.hidden;
+    },
+    false
+  );
 
   canvas = document.createElement('canvas');
   canvas.setAttribute('width', 800);
@@ -19,6 +28,14 @@ export function initPinP() {
   });
 }
 
+function nextCall(func) {
+  if (isHidden) {
+    setTimeout(func, 0);
+  } else {
+    window.requestAnimationFrame(func);
+  }
+}
+
 export function handleVideo() {
   const myId = ++uid;
   const comment = document.querySelector('#CommentRenderer canvas');
@@ -30,6 +47,8 @@ export function handleVideo() {
       return;
     }
 
+    targetVideo.style.visibility = isHidden ? 'hidden' : 'visible';
+
     if (canvas && targetVideo.videoWidth) {
       // video
       {
@@ -38,6 +57,7 @@ export function handleVideo() {
         const rate = Math.min(wr, hr);
         const w = Math.floor(targetVideo.videoWidth * rate);
         const h = Math.floor(targetVideo.videoHeight * rate);
+        context.fillStyle = '#000';
         context.fillRect(0, 0, canvas.width, canvas.height);
 
         const isPlayable = !targetVideo.src.includes('https://smile-');
@@ -75,13 +95,23 @@ export function handleVideo() {
           h
         );
       }
+
+      // for debug
+      if (process.env.NODE_ENV != 'production') {
+        context.fillStyle = 'rgba(0, 0, 0, .5)';
+        context.fillRect(0, 0, 300, 55);
+        context.fillStyle = '#fff';
+        context.font = '36px serif';
+        context.fillText(`${Date.now()}`, 10, 40);
+      }
     }
-    window.requestAnimationFrame(update);
+    nextCall(update);
   }
-  window.requestAnimationFrame(update);
+  nextCall(update);
 }
 
 export function startPinP() {
+  isHidden = document.hidden;
   video.play();
   video
     .requestPictureInPicture()

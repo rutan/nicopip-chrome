@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const paths = (() => {
   const root = __dirname;
@@ -31,5 +32,10 @@ module.exports = {
         use: 'babel-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    })
+  ]
 };
