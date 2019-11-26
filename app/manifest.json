@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "nicopip",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "【非公式】ニコニコ動画をPinPで再生します",
   "icons": {
     "16": "img/16.png",
