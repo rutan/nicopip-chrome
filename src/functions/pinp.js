@@ -30,7 +30,7 @@ export function initPinP() {
 
 function nextCall(func) {
   if (isHidden) {
-    setTimeout(func, 0);
+    setTimeout(func, 16);
   } else {
     window.requestAnimationFrame(func);
   }
@@ -38,14 +38,15 @@ function nextCall(func) {
 
 export function handleVideo() {
   const myId = ++uid;
-  const comment = document.querySelector('#CommentRenderer canvas');
-  const targetVideo = document.querySelector('#MainVideoPlayer video');
 
   function update() {
     if (myId != uid) {
       console.log('[PinP] PinP用画面の更新処理を停止しました');
       return;
     }
+
+    const comment = document.querySelector('#CommentRenderer canvas');
+    const targetVideo = document.querySelector('#MainVideoPlayer video');
 
     targetVideo.style.visibility = isHidden ? 'hidden' : 'visible';
 
@@ -117,10 +118,8 @@ export function startPinP() {
     .requestPictureInPicture()
     .then(() => {
       handleVideo();
-      console.log('success');
     })
     .catch(e => {
       console.error(e);
     });
-  console.log('start!!');
 }
