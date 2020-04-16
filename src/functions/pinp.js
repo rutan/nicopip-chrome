@@ -1,3 +1,5 @@
+const FRAME_RATE = 60;
+
 let isHidden = false;
 let canvas;
 let context;
@@ -22,7 +24,7 @@ export function initPinP() {
   context.fillRect(0, 0, canvas.width, canvas.height);
   video = document.createElement('video');
   video.autoplay = true;
-  video.srcObject = canvas.captureStream(60);
+  video.srcObject = canvas.captureStream(FRAME_RATE);
   video.addEventListener('leavepictureinpicture', () => {
     ++uid;
   });
@@ -30,72 +32,70 @@ export function initPinP() {
 
 function nextCall(func) {
   if (isHidden) {
-    setTimeout(func, 16);
+    window.setTimeout(func, 1000 / FRAME_RATE);
   } else {
     window.requestAnimationFrame(func);
   }
 }
 
+function calcSize(srcWidth, srcHeight, dstWidth, dstHeight) {
+  const wr = dstWidth / srcWidth;
+  const hr = dstHeight / srcHeight;
+  const rate = Math.min(wr, hr);
+  const w = Math.floor(srcWidth * rate);
+  const h = Math.floor(srcHeight * rate);
+
+  return { width: w, height: h };
+}
+
 export function handleVideo() {
   const myId = ++uid;
+  const comment = document.querySelector('#CommentRenderer canvas, [class^=___comment-layer___] canvas');
+  const targetVideo = document.querySelector('#MainVideoPlayer video, [class^=___video-layer___] video');
 
   function update() {
     if (myId != uid) {
+      targetVideo.style.visibility = 'visible';
       console.log('[PinP] PinP用画面の更新処理を停止しました');
       return;
     }
 
-    const comment = document.querySelector('#CommentRenderer canvas');
-    const targetVideo = document.querySelector('#MainVideoPlayer video');
+    if (canvas && targetVideo && targetVideo.videoWidth) {
+      targetVideo.style.visibility = isHidden ? 'hidden' : 'visible';
 
-    targetVideo.style.visibility = isHidden ? 'hidden' : 'visible';
+      context.fillStyle = '#000';
+      context.fillRect(0, 0, canvas.width, canvas.height);
 
-    if (canvas && targetVideo.videoWidth) {
       // video
-      {
-        const wr = canvas.width / targetVideo.videoWidth;
-        const hr = canvas.height / targetVideo.videoHeight;
-        const rate = Math.min(wr, hr);
-        const w = Math.floor(targetVideo.videoWidth * rate);
-        const h = Math.floor(targetVideo.videoHeight * rate);
-        context.fillStyle = '#000';
-        context.fillRect(0, 0, canvas.width, canvas.height);
-
-        const isPlayable = !targetVideo.src.includes('https://smile-');
-        if (isPlayable) {
-          context.drawImage(
-            targetVideo,
-            0,
-            0,
-            targetVideo.videoWidth,
-            targetVideo.videoHeight,
-            (canvas.width - w) / 2,
-            (canvas.height - h) / 2,
-            w,
-            h
-          );
-        }
+      const videoSize = calcSize(targetVideo.videoWidth, targetVideo.videoHeight, canvas.width, canvas.height);
+      const isPlayable = !targetVideo.src.includes('https://smile-');
+      if (isPlayable) {
+        context.drawImage(
+          targetVideo,
+          0,
+          0,
+          targetVideo.videoWidth,
+          targetVideo.videoHeight,
+          (canvas.width - videoSize.width) / 2,
+          (canvas.height - videoSize.height) / 2,
+          videoSize.width,
+          videoSize.height
+        );
       }
 
       // comment
-      {
-        const wr = canvas.width / comment.width;
-        const hr = canvas.height / comment.height;
-        const rate = Math.min(wr, hr);
-        const w = comment.width * rate;
-        const h = comment.height * rate;
-        context.drawImage(
-          comment,
-          0,
-          0,
-          comment.width,
-          comment.height,
-          (canvas.width - w) / 2,
-          (canvas.height - h) / 2,
-          w,
-          h
-        );
-      }
+      const commentSize = calcSize(comment.width, comment.height, canvas.width, canvas.height);
+      context.drawImage(
+        comment,
+        0,
+        0,
+        comment.width,
+        comment.height,
+        (canvas.width - commentSize.width) / 2,
+        (canvas.height - commentSize.height) / 2,
+        commentSize.width,
+        commentSize.height
+      );
 
       // for debug
       if (process.env.NODE_ENV != 'production') {
