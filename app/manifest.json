@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "nicopip",
   "version": "1.0.1",
-  "description": "【非公式】ニコニコ動画をPinPで再生します",
+  "description": "【非公式】ニコニコ動画・ニコニコ生放送をPinPで再生します",
   "icons": {
     "16": "img/16.png",
     "24": "img/24.png",
@@ -14,7 +14,11 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.nicovideo.jp/watch/*"],
+      "matches": [
+        "https://www.nicovideo.jp/watch/*",
+        "https://live.nicovideo.jp/watch/*",
+        "https://live2.nicovideo.jp/watch/*"
+      ],
       "js": ["js/contentScript.js"]
     }
   ]
