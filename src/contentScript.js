@@ -1,24 +1,15 @@
-import { injectMenu } from './functions/injectMenu';
+import { copyButton } from './functions/copyButton';
 import { initPinP, startPinP } from './functions/pinp';
+import PictureInPictureIcon from './svg/pinpIcon';
 
-(() => {
-  const menu = [
-    {
-      name: '[非公式] PinPで表示する',
-      onClick: startPinP
-    }
-  ];
-  const target = document.querySelector('.WatchAppContainer');
-  const observer = new MutationObserver(records => {
-    records.forEach(record => {
-      const node = record.addedNodes[0];
-      if (!node) return;
-      if (node.className != 'ContextMenu-wrapper') return;
-      const list = node.querySelector('.VideoContextMenuContainer');
-      if (!list) return;
-      initPinP();
-      injectMenu(list, menu);
-    });
-  });
-  observer.observe(target, { childList: true });
-})();
+const TITLE = 'Picture in Picture';
+
+const fullScreenButton = document.querySelector(
+  '.ControllerContainer .EnableFullScreenButton, [class^=___addon-controller___] [class^=___fullscreen-button___]'
+);
+
+if (fullScreenButton) {
+  initPinP();
+  // フルスクボタンをコピーしPinPボタンにする
+  copyButton(fullScreenButton, TITLE, PictureInPictureIcon, startPinP);
+}
