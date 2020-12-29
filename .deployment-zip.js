@@ -8,5 +8,5 @@ module.exports = {
   output: `_dist/${manifest.name}_${manifest.version}.zip`,
 
   // ignore file (format: .gitignore)
-  ignore: ['.DS_Store', 'thumb.db']
+  ignore: ['.DS_Store', 'thumb.db'],
 };
