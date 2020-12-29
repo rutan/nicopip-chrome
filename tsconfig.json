@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "esnext",
+    "allowJs": true,
+    "rootDir": ".",
+    "noEmit": true,
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "types": [
+      "@types/node"
+    ],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
