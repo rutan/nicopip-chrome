@@ -14,7 +14,7 @@ const paths = (() => {
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  bail: true,
+  bail: isProduction,
   mode: isProduction ? 'production' : 'development',
   entry: {
     contentScript: path.join(paths.src, 'contentScript.js')
@@ -23,7 +23,7 @@ module.exports = {
     path: paths.out,
     filename: '[name].js'
   },
-  devtool: isProduction ? false : 'cheap-module-eval-source-map',
+  devtool: isProduction ? false : 'eval-cheap-module-source-map',
   module: {
     rules: [
       {
