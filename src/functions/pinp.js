@@ -68,20 +68,17 @@ export function handleVideo() {
 
       // video
       const videoSize = calcSize(targetVideo.videoWidth, targetVideo.videoHeight, canvas.width, canvas.height);
-      const isPlayable = !targetVideo.src.includes('https://smile-');
-      if (isPlayable) {
-        context.drawImage(
-          targetVideo,
-          0,
-          0,
-          targetVideo.videoWidth,
-          targetVideo.videoHeight,
-          (canvas.width - videoSize.width) / 2,
-          (canvas.height - videoSize.height) / 2,
-          videoSize.width,
-          videoSize.height
-        );
-      }
+      context.drawImage(
+        targetVideo,
+        0,
+        0,
+        targetVideo.videoWidth,
+        targetVideo.videoHeight,
+        (canvas.width - videoSize.width) / 2,
+        (canvas.height - videoSize.height) / 2,
+        videoSize.width,
+        videoSize.height
+      );
 
       // comment
       const commentSize = calcSize(comment.width, comment.height, canvas.width, canvas.height);
