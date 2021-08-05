@@ -50,7 +50,7 @@ function calcSize(srcWidth, srcHeight, dstWidth, dstHeight) {
 
 export function handleVideo() {
   const myId = ++uid;
-  const comment = document.querySelector('#CommentRenderer canvas, [class^=___comment-layer___] canvas');
+  const comment = document.querySelector('.CommentRenderer canvas, [class^=___comment-layer___] canvas');
   const targetVideo = document.querySelector('#MainVideoPlayer video, [class^=___video-layer___] video');
 
   function update() {
@@ -81,18 +81,20 @@ export function handleVideo() {
       );
 
       // comment
-      const commentSize = calcSize(comment.width, comment.height, canvas.width, canvas.height);
-      context.drawImage(
-        comment,
-        0,
-        0,
-        comment.width,
-        comment.height,
-        (canvas.width - commentSize.width) / 2,
-        (canvas.height - commentSize.height) / 2,
-        commentSize.width,
-        commentSize.height
-      );
+      if (comment) {
+        const commentSize = calcSize(comment.width, comment.height, canvas.width, canvas.height);
+        context.drawImage(
+          comment,
+          0,
+          0,
+          comment.width,
+          comment.height,
+          (canvas.width - commentSize.width) / 2,
+          (canvas.height - commentSize.height) / 2,
+          commentSize.width,
+          commentSize.height
+        );
+      }
 
       // for debug
       if (process.env.NODE_ENV != 'production') {
