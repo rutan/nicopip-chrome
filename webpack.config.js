@@ -17,17 +17,20 @@ module.exports = {
   bail: isProduction,
   mode: isProduction ? 'production' : 'development',
   entry: {
-    contentScript: path.join(paths.src, 'contentScript.js')
+    contentScript: path.join(paths.src, 'contentScript.ts')
   },
   output: {
     path: paths.out,
     filename: '[name].js'
   },
   devtool: isProduction ? false : 'eval-cheap-module-source-map',
+  resolve: {
+    extensions: ['.ts', '.js']
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts)$/,
         include: paths.src,
         use: 'babel-loader'
       }
