@@ -59,6 +59,8 @@ export function handleVideo(): void {
   const targetVideo = document.querySelector<HTMLVideoElement>(
     '#MainVideoPlayer video, [class^=___video-layer___] video'
   );
+  const uadView = document.querySelector<HTMLDivElement>('#UadPlayer .UadView');
+  const uadCanvas = document.getElementById('UadView-canvas') as HTMLCanvasElement;
 
   function update() {
     if (!comment || !targetVideo || !context || myId != uid) {
@@ -86,6 +88,22 @@ export function handleVideo(): void {
         videoSize.width,
         videoSize.height
       );
+
+      // uad
+      if (uadView?.style.display !== 'none' && uadCanvas) {
+        const uadSize = calcSize(uadCanvas.width, uadCanvas.height, canvas.width, canvas.height);
+        context.drawImage(
+          uadCanvas,
+          0,
+          0,
+          uadCanvas.width,
+          uadCanvas.height,
+          (canvas.width - uadSize.width) / 2,
+          (canvas.height - uadSize.height) / 2,
+          uadSize.width,
+          uadSize.height
+        );
+      }
 
       // comment
       if (comment) {
