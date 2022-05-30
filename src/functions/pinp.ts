@@ -61,11 +61,18 @@ export function handleVideo(): void {
   );
   const uadView = document.querySelector<HTMLDivElement>('#UadPlayer .UadView');
   const uadCanvas = document.getElementById('UadView-canvas') as HTMLCanvasElement;
+  const akashicCanvas = document.querySelector<HTMLCanvasElement>('#akashic-gameview canvas');
 
   function update() {
     if (!comment || !targetVideo || !context || myId != uid) {
       if (targetVideo) targetVideo.style.visibility = 'visible';
       console.log('[PinP] PinP用画面の更新処理を停止しました');
+      return;
+    }
+
+    if (!comment.parentElement) {
+      handleVideo();
+      console.log('[PinP] コメントレイヤーの破棄を検知したため再取得します');
       return;
     }
 
@@ -102,6 +109,22 @@ export function handleVideo(): void {
           (canvas.height - uadSize.height) / 2,
           uadSize.width,
           uadSize.height
+        );
+      }
+
+      // akashic
+      if (akashicCanvas) {
+        const size = calcSize(akashicCanvas.width, akashicCanvas.height, canvas.width, canvas.height);
+        context.drawImage(
+          akashicCanvas,
+          0,
+          0,
+          akashicCanvas.width,
+          akashicCanvas.height,
+          (canvas.width - size.width) / 2,
+          (canvas.height - size.height) / 2,
+          size.width,
+          size.height
         );
       }
 

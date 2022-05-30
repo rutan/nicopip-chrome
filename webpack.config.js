@@ -17,7 +17,8 @@ module.exports = {
   bail: isProduction,
   mode: isProduction ? 'production' : 'development',
   entry: {
-    contentScript: path.join(paths.src, 'contentScript.ts')
+    contentScript: path.join(paths.src, 'contentScript.ts'),
+    inject: path.join(paths.src, 'inject.ts')
   },
   output: {
     path: paths.out,

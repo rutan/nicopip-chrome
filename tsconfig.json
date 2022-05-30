@@ -10,7 +10,8 @@
       "dom"
     ],
     "types": [
-      "@types/node"
+      "@types/node",
+      "@types/chrome"
     ],
     "moduleResolution": "node",
     "resolveJsonModule": true,

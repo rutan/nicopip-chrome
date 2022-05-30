@@ -32,3 +32,10 @@ const checkPinPButton = setInterval(function () {
 
   clearInterval(checkPinPButton);
 }, 500);
+
+(() => {
+  const path = chrome.runtime.getURL('js/inject.js');
+  const script = document.createElement('script');
+  script.src = path;
+  document.head.append(script);
+})();
