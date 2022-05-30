@@ -20,5 +20,15 @@ const checkPinPButton = setInterval(function () {
     onClick: startPinP,
   });
 
+  // videoのPinP操作からstartPinPを呼び出すようにする
+  const video = document.querySelector<HTMLVideoElement>('#MainVideoPlayer video, [class^=___video-layer___] video');
+  if (video) {
+    video.disablePictureInPicture = false;
+    video.addEventListener('enterpictureinpicture', (e) => {
+      e.preventDefault();
+      startPinP();
+    });
+  }
+
   clearInterval(checkPinPButton);
 }, 500);
