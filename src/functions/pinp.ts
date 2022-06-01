@@ -59,8 +59,8 @@ export function handleVideo(): void {
   const targetVideo = document.querySelector<HTMLVideoElement>(
     '#MainVideoPlayer video, [class^=___video-layer___] video'
   );
-  const uadView = document.querySelector<HTMLDivElement>('#UadPlayer .UadView');
-  const uadCanvas = document.getElementById('UadView-canvas') as HTMLCanvasElement;
+  const supporterView = document.querySelector<HTMLDivElement>('#UadPlayer .SupporterView');
+  const supporterCanvas = document.getElementById('SupporterView-canvas') as HTMLCanvasElement;
   const akashicCanvas = document.querySelector<HTMLCanvasElement>('#akashic-gameview canvas');
 
   function update() {
@@ -96,19 +96,19 @@ export function handleVideo(): void {
         videoSize.height
       );
 
-      // uad
-      if (uadView?.style.display !== 'none' && uadCanvas) {
-        const uadSize = calcSize(uadCanvas.width, uadCanvas.height, canvas.width, canvas.height);
+      // supporter
+      if (supporterView?.style.visibility === 'visible' && supporterCanvas) {
+        const supporterSize = calcSize(supporterCanvas.width, supporterCanvas.height, canvas.width, canvas.height);
         context.drawImage(
-          uadCanvas,
+          supporterCanvas,
           0,
           0,
-          uadCanvas.width,
-          uadCanvas.height,
-          (canvas.width - uadSize.width) / 2,
-          (canvas.height - uadSize.height) / 2,
-          uadSize.width,
-          uadSize.height
+          supporterCanvas.width,
+          supporterCanvas.height,
+          (canvas.width - supporterSize.width) / 2,
+          (canvas.height - supporterSize.height) / 2,
+          supporterSize.width,
+          supporterSize.height
         );
       }
 
