@@ -21,5 +21,11 @@
       ],
       "js": ["js/contentScript.js"]
     }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["js/inject.js"],
+      "matches": ["https://www.nicovideo.jp/*", "https://live.nicovideo.jp/*", "https://live2.nicovideo.jp/*"]
+    }
   ]
 }
