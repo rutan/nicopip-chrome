@@ -8,6 +8,8 @@ interface CopyButtonParameter {
 export function copyButton({ srcButton, title, icon, onClick }: CopyButtonParameter): void {
   const cloneButton = srcButton.cloneNode(true) as HTMLElement;
 
+  cloneButton.setAttribute('title', title);
+
   // ニコ動
   if (cloneButton.hasAttribute('data-title')) {
     cloneButton.setAttribute('data-title', title);

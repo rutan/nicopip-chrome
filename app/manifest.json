@@ -16,6 +16,7 @@
     {
       "matches": [
         "https://www.nicovideo.jp/watch/*",
+        "https://www.nicovideo.jp/watch_tmp/*",
         "https://live.nicovideo.jp/watch/*",
         "https://live2.nicovideo.jp/watch/*"
       ],
