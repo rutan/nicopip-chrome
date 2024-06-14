@@ -1,3 +1,11 @@
+import {
+  AKASHIC_CANVAS_SELECTOR,
+  COMMENT_CANVAS_TAG_SELECTOR,
+  SUPPORTER_VIEW_CANVAS_SELECTOR,
+  SUPPORTER_VIEW_SELECTOR,
+  VIDEO_TAG_SELECTOR,
+} from '../constants';
+
 const FRAME_RATE = 60;
 
 let isHidden = false;
@@ -53,15 +61,11 @@ function calcSize(srcWidth: number, srcHeight: number, dstWidth: number, dstHeig
 
 export function handleVideo(): void {
   const myId = ++uid;
-  const comment = document.querySelector<HTMLCanvasElement>(
-    '.CommentRenderer canvas, [class^=___comment-layer___] canvas'
-  );
-  const targetVideo = document.querySelector<HTMLVideoElement>(
-    '#MainVideoPlayer video, [class^=___video-layer___] video'
-  );
-  const supporterView = document.querySelector<HTMLDivElement>('#UadPlayer .SupporterView');
-  const supporterCanvas = document.getElementById('SupporterView-canvas') as HTMLCanvasElement;
-  const akashicCanvas = document.querySelector<HTMLCanvasElement>('#akashic-gameview canvas');
+  const comment = document.querySelector<HTMLCanvasElement>(COMMENT_CANVAS_TAG_SELECTOR);
+  const targetVideo = document.querySelector<HTMLVideoElement>(VIDEO_TAG_SELECTOR);
+  const supporterView = document.querySelector<HTMLDivElement>(SUPPORTER_VIEW_SELECTOR);
+  const supporterCanvas = document.querySelector<HTMLCanvasElement>(SUPPORTER_VIEW_CANVAS_SELECTOR);
+  const akashicCanvas = document.querySelector<HTMLCanvasElement>(AKASHIC_CANVAS_SELECTOR);
 
   function update() {
     if (!comment || !targetVideo || !context || myId != uid) {
@@ -97,7 +101,13 @@ export function handleVideo(): void {
       );
 
       // supporter
-      if (supporterView?.style.visibility === 'visible' && supporterCanvas) {
+      if (
+        // ニコニコ動画
+        (supporterView?.style.visibility === 'visible' ||
+          // ニコニコ動画（Re:仮）
+          (supporterView?.style.visibility === '' && supporterView?.style.display === 'block')) &&
+        supporterCanvas
+      ) {
         const supporterSize = calcSize(supporterCanvas.width, supporterCanvas.height, canvas.width, canvas.height);
         context.drawImage(
           supporterCanvas,
