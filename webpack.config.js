@@ -24,7 +24,7 @@ module.exports = {
     path: paths.out,
     filename: '[name].js'
   },
-  devtool: isProduction ? false : 'eval-cheap-module-source-map',
+  devtool: isProduction ? false : 'cheap-source-map',
   resolve: {
     extensions: ['.ts', '.js']
   },
@@ -39,7 +39,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     })
   ]
 };

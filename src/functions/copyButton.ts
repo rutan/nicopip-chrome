@@ -5,7 +5,7 @@ interface CopyButtonParameter {
   onClick: () => void;
 }
 
-export function copyButton({ srcButton, title, icon, onClick }: CopyButtonParameter): void {
+export function copyButton({ srcButton, title, icon, onClick }: CopyButtonParameter): HTMLElement {
   const cloneButton = srcButton.cloneNode(true) as HTMLElement;
 
   cloneButton.setAttribute('title', title);
@@ -23,7 +23,11 @@ export function copyButton({ srcButton, title, icon, onClick }: CopyButtonParame
   const iconImage = cloneButton.querySelector('svg, img');
 
   if (iconImage && iconImage.parentNode) {
-    (iconImage.parentNode as HTMLElement).innerHTML = icon;
+    const parentNode = iconImage.parentNode as HTMLElement;
+    parentNode.innerHTML = icon;
+
+    const oldClassName = iconImage.getAttribute('class');
+    if (oldClassName) parentNode.children[0].setAttribute('class', oldClassName);
   }
 
   cloneButton.addEventListener('click', () => {
@@ -33,4 +37,6 @@ export function copyButton({ srcButton, title, icon, onClick }: CopyButtonParame
   if (srcButton.parentNode) {
     srcButton.parentNode.insertBefore(cloneButton, srcButton.nextSibling);
   }
+
+  return cloneButton;
 }
