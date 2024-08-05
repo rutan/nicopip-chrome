@@ -74,7 +74,7 @@ export function handleVideo(): void {
       return;
     }
 
-    if (!comment.parentElement) {
+    if (!comment.parentElement || comment.width === 0 || comment.height === 0) {
       handleVideo();
       console.log('[PinP] コメントレイヤーの破棄を検知したため再取得します');
       return;
