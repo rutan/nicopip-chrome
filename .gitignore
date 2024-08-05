@@ -1,5 +1,4 @@
 /_dist
-/app/js/*.js
-/app/js/*.txt
+/app/js/*
 /node_modules
 *.log
