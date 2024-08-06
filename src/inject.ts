@@ -8,15 +8,13 @@
 
     set src(value: string) {
       super.src = value;
-      if (value && value.match(cdnNimgJpPattern)) {
+      if (value?.match(cdnNimgJpPattern)) {
         this.crossOrigin = 'anonymous';
       }
     }
   }
 
   window.Image = new Proxy(window.Image, {
-    construct: function (target, args) {
-      return new AutoAnonymousImage(...args);
-    },
+    construct: (target, args) => new AutoAnonymousImage(...args),
   });
 })();
