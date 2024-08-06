@@ -1,7 +1,8 @@
-const path = require('node:path');
-const webpack = require('webpack');
+import * as path from 'node:path';
+import webpack from 'webpack';
 
 const paths = (() => {
+  const __dirname = new URL('.', import.meta.url).pathname;
   const root = __dirname;
   return {
     root,
@@ -13,7 +14,7 @@ const paths = (() => {
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-module.exports = {
+export default {
   bail: isProduction,
   mode: isProduction ? 'production' : 'development',
   entry: {
