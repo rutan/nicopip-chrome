@@ -1,4 +1,8 @@
-import { EXTENSION_LABEL, TARGET_BUTTON_SELECTOR, VIDEO_TAG_SELECTOR } from './constants';
+import {
+  EXTENSION_LABEL,
+  TARGET_BUTTON_SELECTOR,
+  VIDEO_TAG_SELECTOR,
+} from './constants';
 import { copyButton } from './functions/copyButton';
 import { initPinP, startPinP } from './functions/pinp';
 import PictureInPictureIcon from './svg/pinpIcon';
@@ -16,7 +20,9 @@ import PictureInPictureIcon from './svg/pinpIcon';
     let isSetupVideo = false;
 
     const func = () => {
-      const targetButtons = document.querySelectorAll<HTMLElement>(TARGET_BUTTON_SELECTOR);
+      const targetButtons = document.querySelectorAll<HTMLElement>(
+        TARGET_BUTTON_SELECTOR,
+      );
       if (targetButtons.length === 0) {
         ++count;
 
@@ -27,7 +33,9 @@ import PictureInPictureIcon from './svg/pinpIcon';
         }
 
         // それ以上だったらページ構造が変わったと判断して終了
-        console.log('[nicopip] ページ内からボタンを検知できなかったため終了します');
+        console.log(
+          '[nicopip] ページ内からボタンを検知できなかったため終了します',
+        );
         return;
       }
 
@@ -50,9 +58,12 @@ import PictureInPictureIcon from './svg/pinpIcon';
       const observer = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
           if (mutation.type !== 'childList') return;
+
           mutation.removedNodes.forEach((node) => {
             if (!node.contains(newButton)) return;
-            console.log('[nicopip] ボタンが削除されたため、再度ボタンを作成します');
+            console.log(
+              '[nicopip] ボタンが削除されたため、再度ボタンを作成します',
+            );
             observer.disconnect();
             window.setTimeout(func, 100);
             return;
@@ -63,7 +74,8 @@ import PictureInPictureIcon from './svg/pinpIcon';
 
       // videoのPinP操作からstartPinPを呼び出すようにする
       if (!isSetupVideo) {
-        const video = document.querySelector<HTMLVideoElement>(VIDEO_TAG_SELECTOR);
+        const video =
+          document.querySelector<HTMLVideoElement>(VIDEO_TAG_SELECTOR);
         if (video) {
           isSetupVideo = true;
           video.disablePictureInPicture = false;

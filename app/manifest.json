@@ -26,7 +26,11 @@
   "web_accessible_resources": [
     {
       "resources": ["js/inject.js"],
-      "matches": ["https://www.nicovideo.jp/*", "https://live.nicovideo.jp/*", "https://live2.nicovideo.jp/*"]
+      "matches": [
+        "https://www.nicovideo.jp/*",
+        "https://live.nicovideo.jp/*",
+        "https://live2.nicovideo.jp/*"
+      ]
     }
   ]
 }

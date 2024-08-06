@@ -22,7 +22,7 @@ export function initPinP(): void {
     () => {
       isHidden = document.hidden;
     },
-    false
+    false,
   );
 
   canvas = document.createElement('canvas');
@@ -35,7 +35,7 @@ export function initPinP(): void {
   context.fillRect(0, 0, canvas.width, canvas.height);
   video = document.createElement('video');
   video.autoplay = true;
-  video.srcObject = (canvas as any).captureStream(FRAME_RATE);
+  video.srcObject = canvas.captureStream(FRAME_RATE);
   video.addEventListener('leavepictureinpicture', () => {
     ++uid;
   });
@@ -49,7 +49,12 @@ function nextCall(func: () => void) {
   }
 }
 
-function calcSize(srcWidth: number, srcHeight: number, dstWidth: number, dstHeight: number) {
+function calcSize(
+  srcWidth: number,
+  srcHeight: number,
+  dstWidth: number,
+  dstHeight: number,
+) {
   const wr = dstWidth / srcWidth;
   const hr = dstHeight / srcHeight;
   const rate = Math.min(wr, hr);
@@ -61,14 +66,23 @@ function calcSize(srcWidth: number, srcHeight: number, dstWidth: number, dstHeig
 
 export function handleVideo(): void {
   const myId = ++uid;
-  const comment = document.querySelector<HTMLCanvasElement>(COMMENT_CANVAS_TAG_SELECTOR);
-  const targetVideo = document.querySelector<HTMLVideoElement>(VIDEO_TAG_SELECTOR);
-  const supporterView = document.querySelector<HTMLDivElement>(SUPPORTER_VIEW_SELECTOR);
-  const supporterCanvas = document.querySelector<HTMLCanvasElement>(SUPPORTER_VIEW_CANVAS_SELECTOR);
-  const akashicCanvas = document.querySelector<HTMLCanvasElement>(AKASHIC_CANVAS_SELECTOR);
+  const comment = document.querySelector<HTMLCanvasElement>(
+    COMMENT_CANVAS_TAG_SELECTOR,
+  );
+  const targetVideo =
+    document.querySelector<HTMLVideoElement>(VIDEO_TAG_SELECTOR);
+  const supporterView = document.querySelector<HTMLDivElement>(
+    SUPPORTER_VIEW_SELECTOR,
+  );
+  const supporterCanvas = document.querySelector<HTMLCanvasElement>(
+    SUPPORTER_VIEW_CANVAS_SELECTOR,
+  );
+  const akashicCanvas = document.querySelector<HTMLCanvasElement>(
+    AKASHIC_CANVAS_SELECTOR,
+  );
 
   function update() {
-    if (!comment || !targetVideo || !context || myId != uid) {
+    if (!comment || !targetVideo || !context || myId !== uid) {
       if (targetVideo) targetVideo.style.visibility = 'visible';
       console.log('[PinP] PinP用画面の更新処理を停止しました');
       return;
@@ -87,7 +101,12 @@ export function handleVideo(): void {
       context.fillRect(0, 0, canvas.width, canvas.height);
 
       // video
-      const videoSize = calcSize(targetVideo.videoWidth, targetVideo.videoHeight, canvas.width, canvas.height);
+      const videoSize = calcSize(
+        targetVideo.videoWidth,
+        targetVideo.videoHeight,
+        canvas.width,
+        canvas.height,
+      );
       context.drawImage(
         targetVideo,
         0,
@@ -97,7 +116,7 @@ export function handleVideo(): void {
         (canvas.width - videoSize.width) / 2,
         (canvas.height - videoSize.height) / 2,
         videoSize.width,
-        videoSize.height
+        videoSize.height,
       );
 
       // supporter
@@ -105,10 +124,16 @@ export function handleVideo(): void {
         // ニコニコ動画
         (supporterView?.style.visibility === 'visible' ||
           // ニコニコ動画（Re:仮）
-          (supporterView?.style.visibility === '' && supporterView?.style.display === 'block')) &&
+          (supporterView?.style.visibility === '' &&
+            supporterView?.style.display === 'block')) &&
         supporterCanvas
       ) {
-        const supporterSize = calcSize(supporterCanvas.width, supporterCanvas.height, canvas.width, canvas.height);
+        const supporterSize = calcSize(
+          supporterCanvas.width,
+          supporterCanvas.height,
+          canvas.width,
+          canvas.height,
+        );
         context.drawImage(
           supporterCanvas,
           0,
@@ -118,13 +143,18 @@ export function handleVideo(): void {
           (canvas.width - supporterSize.width) / 2,
           (canvas.height - supporterSize.height) / 2,
           supporterSize.width,
-          supporterSize.height
+          supporterSize.height,
         );
       }
 
       // akashic
       if (akashicCanvas) {
-        const size = calcSize(akashicCanvas.width, akashicCanvas.height, canvas.width, canvas.height);
+        const size = calcSize(
+          akashicCanvas.width,
+          akashicCanvas.height,
+          canvas.width,
+          canvas.height,
+        );
         context.drawImage(
           akashicCanvas,
           0,
@@ -134,13 +164,18 @@ export function handleVideo(): void {
           (canvas.width - size.width) / 2,
           (canvas.height - size.height) / 2,
           size.width,
-          size.height
+          size.height,
         );
       }
 
       // comment
       if (comment) {
-        const commentSize = calcSize(comment.width, comment.height, canvas.width, canvas.height);
+        const commentSize = calcSize(
+          comment.width,
+          comment.height,
+          canvas.width,
+          canvas.height,
+        );
         context.drawImage(
           comment,
           0,
@@ -150,12 +185,12 @@ export function handleVideo(): void {
           (canvas.width - commentSize.width) / 2,
           (canvas.height - commentSize.height) / 2,
           commentSize.width,
-          commentSize.height
+          commentSize.height,
         );
       }
 
       // for debug
-      if (process.env.NODE_ENV != 'production') {
+      if (process.env.NODE_ENV !== 'production') {
         context.fillStyle = 'rgba(0, 0, 0, .5)';
         context.fillRect(0, 0, 300, 55);
         context.fillStyle = '#fff';
@@ -174,7 +209,7 @@ export function startPinP(): void {
 
   isHidden = document.hidden;
   video.play();
-  (video as any)
+  video
     .requestPictureInPicture()
     .then(() => {
       handleVideo();

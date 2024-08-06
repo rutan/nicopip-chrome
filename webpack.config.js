@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const webpack = require('webpack');
 
 const paths = (() => {
@@ -7,7 +7,7 @@ const paths = (() => {
     root,
     src: path.join(root, 'src'),
     out: path.join(root, 'app', 'js'),
-    nodeModules: path.join(root, 'node_modules')
+    nodeModules: path.join(root, 'node_modules'),
   };
 })();
 
@@ -18,28 +18,30 @@ module.exports = {
   mode: isProduction ? 'production' : 'development',
   entry: {
     contentScript: path.join(paths.src, 'contentScript.ts'),
-    inject: path.join(paths.src, 'inject.ts')
+    inject: path.join(paths.src, 'inject.ts'),
   },
   output: {
     path: paths.out,
-    filename: '[name].js'
+    filename: '[name].js',
   },
   devtool: isProduction ? false : 'cheap-source-map',
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules: [
       {
         test: /\.(js|ts)$/,
         include: paths.src,
-        use: 'babel-loader'
-      }
-    ]
+        use: 'babel-loader',
+      },
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-    })
-  ]
+      'process.env.NODE_ENV': JSON.stringify(
+        process.env.NODE_ENV || 'development',
+      ),
+    }),
+  ],
 };
