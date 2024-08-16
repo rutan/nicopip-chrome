@@ -43,6 +43,10 @@ export const NICO_VIDEO_TARGET_BUTTON_SELECTOR =
   '.ControllerContainer .EnableFullScreenButton';
 // 帰ってきたニコニコ動画
 export const NICO_VIDEO_KAETTEKITA_TARGET_BUTTON_SELECTOR =
+  'button[aria-label="全画面表示する"][class="cursor_pointer"]';
+// 帰ってきたニコニコ動画（旧）
+// しばらく様子を見て、完全にこっちが使われて無さそうなら削除する
+export const NICO_VIDEO_KAETTEKITA_OLD_TARGET_BUTTON_SELECTOR =
   'button[aria-label="フルスクリーン表示"][class="cursor_pointer"]';
 // ニコニコ生放送
 export const NICO_LIVE_TARGET_BUTTON_SELECTOR =
@@ -51,6 +55,7 @@ export const NICO_LIVE_TARGET_BUTTON_SELECTOR =
 export const TARGET_BUTTON_SELECTOR = [
   NICO_VIDEO_TARGET_BUTTON_SELECTOR,
   NICO_VIDEO_KAETTEKITA_TARGET_BUTTON_SELECTOR,
+  NICO_VIDEO_KAETTEKITA_OLD_TARGET_BUTTON_SELECTOR,
   NICO_LIVE_TARGET_BUTTON_SELECTOR,
 ].join(',');
 
