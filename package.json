@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "nicopinp",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "main": "index.js",
   "author": "ru_shalm <ru_shalm@hazimu.com>",
   "license": "MIT",
