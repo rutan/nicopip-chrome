@@ -77,9 +77,11 @@ export function handleVideo(): void {
   const supporterCanvas = document.querySelector<HTMLCanvasElement>(
     SUPPORTER_VIEW_CANVAS_SELECTOR,
   );
-  const akashicCanvas = document.querySelector<HTMLCanvasElement>(
+
+  let akashicCanvas = document.querySelector<HTMLCanvasElement>(
     AKASHIC_CANVAS_SELECTOR,
   );
+  const akashicCanvasContext = akashicCanvas?.getContext('2d');
 
   function update() {
     if (!comment || !targetVideo || !context || myId !== uid) {
@@ -149,23 +151,32 @@ export function handleVideo(): void {
 
       // akashic
       if (akashicCanvas) {
-        const size = calcSize(
-          akashicCanvas.width,
-          akashicCanvas.height,
-          canvas.width,
-          canvas.height,
-        );
-        context.drawImage(
-          akashicCanvas,
-          0,
-          0,
-          akashicCanvas.width,
-          akashicCanvas.height,
-          (canvas.width - size.width) / 2,
-          (canvas.height - size.height) / 2,
-          size.width,
-          size.height,
-        );
+        try {
+          // 外部リソースの読み込みによって canvas が汚染されていないかを確認
+          akashicCanvasContext?.getImageData(0, 0, 1, 1);
+
+          const size = calcSize(
+            akashicCanvas.width,
+            akashicCanvas.height,
+            canvas.width,
+            canvas.height,
+          );
+          context.drawImage(
+            akashicCanvas,
+            0,
+            0,
+            akashicCanvas.width,
+            akashicCanvas.height,
+            (canvas.width - size.width) / 2,
+            (canvas.height - size.height) / 2,
+            size.width,
+            size.height,
+          );
+        } catch (e) {
+          // canvas が汚染されている場合は AkashicCanvas をPinP対象から削除
+          console.error(e);
+          akashicCanvas = null;
+        }
       }
 
       // comment
