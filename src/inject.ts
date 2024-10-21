@@ -7,7 +7,7 @@
     // ギフト
     'https://ir.cdn.nimg.jp/',
     // エモーション
-    'https://secure-dcdn.cdn.nimg.jp/',
+    'https://secure-dcdn.cdn.nimg.jp/nicoad/',
   ];
 
   class AutoAnonymousImage extends Image {
