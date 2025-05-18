@@ -2202,6 +2202,11 @@
     "@types/filesystem" "*"
     "@types/har-format" "*"
 
+"@types/dom-navigation@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@types/dom-navigation/-/dom-navigation-1.0.5.tgz#5fd6ed014d3ee66b53b0733b6c50994c105b542d"
+  integrity sha512-aM1Mr488jX62+6b9zdEtPHFnI7ILgvbII4BaBJMaqhhbDBupJJJ8+nXFVyQT1ptujOUAg6Sojkjk3j6rU73Bwg==
+
 "@types/eslint-scope@^3.7.3":
   version "3.7.7"
   resolved "https://registry.yarnpkg.com/@types/eslint-scope/-/eslint-scope-3.7.7.tgz#3108bd5f18b0cdb277c867b3dd449c9ed7079ac5"

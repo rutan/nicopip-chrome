@@ -3,27 +3,21 @@ export const EXTENSION_LABEL = '[非公式] PinP';
 /*
  * video タグのセレクタ
  */
-// ニコニコ動画（eR）
-export const NICO_VIDEO_VIDEO_TAG_SELECTOR = '#MainVideoPlayer video';
-// 帰ってきたニコニコ動画
-export const NICO_VIDEO_KAETTEKITA_VIDEO_TAG_SELECTOR =
-  '[data-name="content"] video';
+// ニコニコ動画
+export const NICO_VIDEO_VIDEO_TAG_SELECTOR = '[data-name="content"] video';
 // ニコニコ生放送
 export const NICO_LIVE_VIDEO_TAG_SELECTOR = '[class^=___video-layer___] video';
 
 export const VIDEO_TAG_SELECTOR = [
   NICO_VIDEO_VIDEO_TAG_SELECTOR,
-  NICO_VIDEO_KAETTEKITA_VIDEO_TAG_SELECTOR,
   NICO_LIVE_VIDEO_TAG_SELECTOR,
 ].join(',');
 
 /*
  * コメント用 canvas のセレクタ
  */
-// ニコニコ動画（eR）
-export const NICO_VIDEO_COMMENT_CANVAS_TAG_SELECTOR = '.CommentRenderer canvas';
-// 帰ってきたニコニコ動画
-export const NICO_VIDEO_KAETTEKITA_COMMENT_CANVAS_TAG_SELECTOR =
+// ニコニコ動画
+export const NICO_VIDEO_COMMENT_CANVAS_TAG_SELECTOR =
   '[data-name="comment"] canvas';
 // ニコニコ生放送
 export const NICO_LIVE_COMMENT_CANVAS_TAG_SELECTOR =
@@ -31,59 +25,46 @@ export const NICO_LIVE_COMMENT_CANVAS_TAG_SELECTOR =
 
 export const COMMENT_CANVAS_TAG_SELECTOR = [
   NICO_VIDEO_COMMENT_CANVAS_TAG_SELECTOR,
-  NICO_VIDEO_KAETTEKITA_COMMENT_CANVAS_TAG_SELECTOR,
   NICO_LIVE_COMMENT_CANVAS_TAG_SELECTOR,
 ].join(',');
 
 /*
  * コピー元とするボタンのセレクタ
  */
-// ニコニコ動画（eR）
+
+// ニコニコ動画
 export const NICO_VIDEO_TARGET_BUTTON_SELECTOR =
-  '.ControllerContainer .EnableFullScreenButton';
-// 帰ってきたニコニコ動画
-export const NICO_VIDEO_KAETTEKITA_TARGET_BUTTON_SELECTOR =
   'button[aria-label="全画面表示する"][class="cursor_pointer"]';
-// 帰ってきたニコニコ動画（旧）
-// しばらく様子を見て、完全にこっちが使われて無さそうなら削除する
-export const NICO_VIDEO_KAETTEKITA_OLD_TARGET_BUTTON_SELECTOR =
-  'button[aria-label="フルスクリーン表示"][class="cursor_pointer"]';
+
 // ニコニコ生放送
 export const NICO_LIVE_TARGET_BUTTON_SELECTOR =
   '[class^=___addon-controller___] [class^=___fullscreen-button___]';
 
 export const TARGET_BUTTON_SELECTOR = [
   NICO_VIDEO_TARGET_BUTTON_SELECTOR,
-  NICO_VIDEO_KAETTEKITA_TARGET_BUTTON_SELECTOR,
-  NICO_VIDEO_KAETTEKITA_OLD_TARGET_BUTTON_SELECTOR,
   NICO_LIVE_TARGET_BUTTON_SELECTOR,
 ].join(',');
 
 /**
  * 提供画面の HTML のセレクタ（ニコニコ動画のみ）
  */
-// ニコニコ動画（eR）
-export const NICO_VIDEO_SUPPORTER_VIEW_SELECTOR = '#UadPlayer .SupporterView';
-// 帰ってきたニコニコ動画（2024/08/05時点では存在しない？）
-// export const NICO_VIDEO_KAETTEKITA_SUPPORTER_VIEW_SELECTOR = 'TODO: change me';
+// ニコニコ動画
+export const NICO_VIDEO_SUPPORTER_VIEW_SELECTOR =
+  '[data-name="supporter-content"]';
 
 export const SUPPORTER_VIEW_SELECTOR = [
   NICO_VIDEO_SUPPORTER_VIEW_SELECTOR,
-  // NICO_VIDEO_KAETTEKITA_SUPPORTER_VIEW_SELECTOR,
 ].join(',');
 
 /**
  * 提供画面の Canvas のセレクタ（ニコニコ動画のみ）
  */
-// ニコニコ動画（eR）
+// ニコニコ動画
 export const NICO_VIDEO_SUPPORTER_VIEW_CANVAS_SELECTOR =
-  '#SupporterView-canvas';
-// 帰ってきたニコニコ動画（2024/08/05時点では存在しない？）
-// export const NICO_VIDEO_KAETTEKITA_SUPPORTER_VIEW_CANVAS_SELECTOR = 'TODO: change me';
+  '[data-name="supporter-content"] canvas';
 
 export const SUPPORTER_VIEW_CANVAS_SELECTOR = [
   NICO_VIDEO_SUPPORTER_VIEW_CANVAS_SELECTOR,
-  // NICO_VIDEO_KAETTEKITA_SUPPORTER_VIEW_CANVAS_SELECTOR,
 ].join(',');
 
 /**
