@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "nicopip",
-  "version": "1.6.3",
+  "version": "1.7.0",
   "description": "【非公式】ニコニコ動画・ニコニコ生放送をPinPで再生します",
   "icons": {
     "16": "img/16.png",
