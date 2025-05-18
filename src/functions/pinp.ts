@@ -124,10 +124,7 @@ export function handleVideo(): void {
       // supporter
       if (
         // ニコニコ動画
-        (supporterView?.style.visibility === 'visible' ||
-          // ニコニコ動画（Re:仮）
-          (supporterView?.style.visibility === '' &&
-            supporterView?.style.display === 'block')) &&
+        supporterView?.style.opacity !== '0' &&
         supporterCanvas
       ) {
         const supporterSize = calcSize(

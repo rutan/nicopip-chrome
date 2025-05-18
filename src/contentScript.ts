@@ -1,13 +1,17 @@
+import { EXTENSION_LABEL, TARGET_BUTTON_SELECTOR } from './constants';
 import {
-  EXTENSION_LABEL,
-  TARGET_BUTTON_SELECTOR,
-  VIDEO_TAG_SELECTOR,
-} from './constants';
-import { copyButton } from './functions/copyButton';
+  copyButton,
+  observeMissingButton,
+  searchBaseButton,
+  searchNicoPipButton,
+} from './functions/button';
+import { createRouter } from './functions/createRouter';
 import { initPinP, startPinP } from './functions/pinp';
 import PictureInPictureIcon from './svg/pinpIcon';
 
 (() => {
+  console.log('[nicopip] スクリプトの実行を開始します。');
+
   // ページにスクリプトを挿入
   // ※主にギフト画像の読み込み問題用。解消したら削除したい。
   const path = chrome.runtime.getURL('js/inject.js');
@@ -15,79 +19,45 @@ import PictureInPictureIcon from './svg/pinpIcon';
   script.src = path;
   document.head.append(script);
 
-  const checkPinPButton = (() => {
-    let count = 0;
-    let isSetupVideo = false;
-
-    const func = () => {
-      const targetButtons = document.querySelectorAll<HTMLElement>(
-        TARGET_BUTTON_SELECTOR,
+  // 初期化処理
+  async function setup() {
+    // コピー元のボタンを取得
+    const baseButton = await searchBaseButton({
+      selector: TARGET_BUTTON_SELECTOR,
+    });
+    if (!baseButton) {
+      console.log(
+        '[PinP] ボタンが見つからなかったため処理を中断します。ページ構成が変更された可能性があります。',
       );
-      if (targetButtons.length === 0) {
-        ++count;
+      return;
+    }
 
-        // 一定回数以下だったら時間を開けてリトライする
-        if (count < 15) {
-          window.setTimeout(func, 500);
-          return;
-        }
+    // 既に PinP ボタンが存在する場合は、処理を中断する
+    // ボタンの取得は非同期なので、探したあとに確認する
+    if (searchNicoPipButton()) return;
 
-        // それ以上だったらページ構造が変わったと判断して終了
-        console.log(
-          '[nicopip] ページ内からボタンを検知できなかったため終了します',
-        );
-        return;
-      }
+    // PinP の初期化
+    initPinP();
 
-      // カウンターをリセット
-      count = 0;
+    // PinP ボタンの追加
+    const button = copyButton({
+      srcButton: baseButton,
+      title: EXTENSION_LABEL,
+      icon: PictureInPictureIcon,
+      onClick: startPinP,
+    });
 
-      // PinPの初期化
-      initPinP();
+    // ボタン消去の監視
+    // ページ遷移や DOM の変更でボタンが消えた場合、再度初期化処理を実行する
+    observeMissingButton(button, () => {
+      console.log('[PinP] ボタンが削除されたため、再度初期化処理を実行します');
+      setup();
+    });
+  }
 
-      // ボタンをコピーしPinPボタンにする
-      const targetButton = targetButtons[targetButtons.length - 1];
-      const newButton = copyButton({
-        srcButton: targetButton,
-        title: EXTENSION_LABEL,
-        icon: PictureInPictureIcon,
-        onClick: startPinP,
-      });
-
-      // ボタン消去の監視
-      const observer = new MutationObserver((mutationsList) => {
-        for (const mutation of mutationsList) {
-          if (mutation.type !== 'childList') return;
-
-          mutation.removedNodes.forEach((node) => {
-            if (!node.contains(newButton)) return;
-            console.log(
-              '[nicopip] ボタンが削除されたため、再度ボタンを作成します',
-            );
-            observer.disconnect();
-            window.setTimeout(func, 100);
-            return;
-          });
-        }
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-
-      // videoのPinP操作からstartPinPを呼び出すようにする
-      if (!isSetupVideo) {
-        const video =
-          document.querySelector<HTMLVideoElement>(VIDEO_TAG_SELECTOR);
-        if (video) {
-          isSetupVideo = true;
-          video.disablePictureInPicture = false;
-          video.addEventListener('enterpictureinpicture', (e) => {
-            e.preventDefault();
-            startPinP();
-          });
-        }
-      }
-    };
-    return func;
-  })();
-
-  checkPinPButton();
+  // ルーティングの設定
+  const router = createRouter();
+  router.define('https://www.nicovideo.jp/watch/:id', setup);
+  router.define('https://live.nicovideo.jp/watch/:id', setup);
+  router.start();
 })();

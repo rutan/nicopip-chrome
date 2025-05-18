@@ -16,9 +16,8 @@
     {
       "matches": [
         "https://www.nicovideo.jp/watch/*",
-        "https://www.nicovideo.jp/watch_tmp/*",
-        "https://live.nicovideo.jp/watch/*",
-        "https://live2.nicovideo.jp/watch/*"
+        "https://www.nicovideo.jp/ranking/*",
+        "https://live.nicovideo.jp/watch/*"
       ],
       "js": ["js/contentScript.js"]
     }
@@ -26,11 +25,7 @@
   "web_accessible_resources": [
     {
       "resources": ["js/inject.js"],
-      "matches": [
-        "https://www.nicovideo.jp/*",
-        "https://live.nicovideo.jp/*",
-        "https://live2.nicovideo.jp/*"
-      ]
+      "matches": ["https://www.nicovideo.jp/*", "https://live.nicovideo.jp/*"]
     }
   ]
 }
