@@ -1,15 +1,25 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
-  "files": {
-    "ignore": ["_dist/**/*", "app/js/**/*"]
-  },
+  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
   },
-  "organizeImports": {
-    "enabled": true
+  "files": {
+    "ignoreUnknown": false,
+    "includes": [
+      "**/*",
+
+      // vscode
+      "!.vscode/**/*",
+
+      // claude
+      "!claude/**/*",
+
+      // pnpm
+      "!pnpm-*.yaml",
+      "!patches/**/*"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -17,17 +27,25 @@
     "indentWidth": 2,
     "lineWidth": 80
   },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "single"
-    }
-  },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "complexity": {
         "noForEach": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
       }
     }
   }
