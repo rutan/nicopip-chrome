@@ -7,7 +7,8 @@ import {
   searchNicoPipButton,
   startPinP,
 } from '../functions';
-import PictureInPictureIcon from '../svg/pinpIcon';
+import injectUrl from '../inject?script';
+import { PictureInPictureIcon } from '../svg';
 
 export async function routeNicoLive() {
   injectScriptAndStyle();
@@ -56,7 +57,7 @@ const injectScriptAndStyle = (() => {
 
     // ページにスクリプトを挿入
     // ※主にギフト画像の読み込み問題用。解消したら削除したい。
-    const path = chrome.runtime.getURL('js/inject.js');
+    const path = chrome.runtime.getURL(injectUrl);
     const script = document.createElement('script');
     script.src = path;
     document.head.append(script);

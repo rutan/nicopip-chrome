@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "esnext",
-    "allowJs": true,
     "rootDir": ".",
-    "noEmit": true,
+    "target": "ESNext",
+    "module": "ESNext",
     "lib": ["ESNext", "dom"],
     "types": ["@types/node", "@types/chrome", "@types/dom-navigation"],
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "allowJs": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "resolveJsonModule": true,
     "strict": true,
-    "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true
+    "skipLibCheck": true
   },
   "include": ["src/**/*"]
 }

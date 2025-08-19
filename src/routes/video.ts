@@ -7,7 +7,7 @@ import {
   searchNicoPipButton,
   startPinP,
 } from '../functions';
-import PictureInPictureIcon from '../svg/pinpIcon';
+import { PictureInPictureIcon } from '../svg';
 
 export async function routeNicoVideo() {
   setupNicoVideo();

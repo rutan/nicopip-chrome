@@ -1,11 +1,11 @@
 # nicopip-chrome
 
-ニコニコ動画の動画プレイヤーをコメント付きでPinPするChrome拡張（非公式）
+ニコニコ動画 / ニコニコ生放送の動画プレイヤーをコメント付きでPinPするChrome拡張（非公式）
 
 ## How to build
 ```bash
-$ yarn install
-$ yarn run build
+$ pnpm install
+$ pnpm run build
 ```
 
 ## License
