@@ -46,8 +46,10 @@ async function setupNicoVideo() {
   // PinPボタンのアイコンを設定
   const originalSvg = button.querySelector('svg');
   if (originalSvg) {
-    originalSvg.classList.add('fill_icon.watchControllerBase');
-    originalSvg.classList.add('hover:fill_icon.watchControllerHover');
+    originalSvg.classList.add(
+      'fill_icon.watchControllerBase',
+      'hover:fill_icon.watchControllerHover',
+    );
     originalSvg.classList.remove('fill_icon.watchControllerDisabled');
 
     button.innerHTML = PictureInPictureIcon;
