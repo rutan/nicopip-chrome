@@ -34,7 +34,7 @@ export const COMMENT_CANVAS_TAG_SELECTOR = [
 
 // ニコニコ動画
 export const NICO_VIDEO_TARGET_BUTTON_SELECTOR =
-  'button[aria-label="全画面表示する"][class="cursor_pointer"]';
+  'button[aria-label="全画面表示する"]';
 
 // ニコニコ生放送
 export const NICO_LIVE_TARGET_BUTTON_SELECTOR =
