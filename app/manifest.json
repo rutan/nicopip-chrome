@@ -15,8 +15,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.nicovideo.jp/watch/*",
-        "https://www.nicovideo.jp/ranking/*",
+        "https://www.nicovideo.jp/*",
         "https://live.nicovideo.jp/watch/*"
       ],
       "js": ["js/contentScript.js"]
