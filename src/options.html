@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nicopip 設定</title>
+  <link rel="stylesheet" href="./options.css">
+</head>
+<body>
+  <h1>nicopip 設定</h1>
+  <p class="description">設定変更後は、視聴ページの再読み込みが必要です。</p>
+
+  <div class="panel">
+    <h2>ニコニコ動画</h2>
+    <ul class="config-list">
+      <li class="config-item">
+        <label>
+          <input type="radio" name="nicoVideo" value="disabled" id="nicoVideo-disabled">
+          <div class="config-item-content">
+            <div class="config-item-title">無効</div>
+            <div class="config-item-description">Picture in Picture を利用しません。</div>
+          </div>
+        </label>
+      </li>
+      <li class="config-item">
+        <label>
+          <input type="radio" name="nicoVideo" value="canvas" id="nicoVideo-canvas">
+          <div class="config-item-content">
+            <div class="config-item-title">Canvas版</div>
+            <div class="config-item-description">動画とコメントを合成した Picture in Picture を利用します。</div>
+          </div>
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>ニコニコ生放送</h2>
+    <ul class="config-list">
+      <li class="config-item">
+        <label>
+          <input type="radio" name="nicoLive" value="disabled" id="nicoLive-disabled">
+          <div class="config-item-content">
+            <div class="config-item-title">無効</div>
+            <div class="config-item-description">Picture in Picture を利用しません。</div>
+          </div>
+        </label>
+      </li>
+      <li class="config-item">
+        <label>
+          <input type="radio" name="nicoLive" value="canvas" id="nicoLive-canvas">
+          <div class="config-item-content">
+            <div class="config-item-title">Canvas版</div>
+            <div class="config-item-description">動画とコメントを合成した Picture in Picture を利用します。</div>
+          </div>
+        </label>
+      </li>
+    </ul>
+  </div>
+  <div class="save-status" id="saveStatus"></div>
+
+  <script type="module" src="./options.ts"></script>
+</body>
+</html>

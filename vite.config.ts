@@ -19,6 +19,8 @@ export default defineConfig({
           '256': 'img/256.png',
           '512': 'img/512.png',
         },
+        options_page: 'src/options.html',
+        permissions: ['storage'],
         content_scripts: [
           {
             matches: [
@@ -40,4 +42,7 @@ export default defineConfig({
       }),
     }),
   ],
+  server: {
+    cors: true,
+  },
 });
