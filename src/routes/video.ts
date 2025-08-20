@@ -88,12 +88,24 @@ async function openDocumentPictureInPicture() {
   dummyElement.style.backgroundColor = '#000000';
   parent.append(dummyElement);
 
-  // biome-ignore lint/suspicious/noExplicitAny: 非標準
-  const win = window as any;
-  const pipWindow = await win.documentPictureInPicture.requestWindow({
-    width: el.clientWidth / 2,
-    height: el.clientHeight / 2,
-  });
+  let pipWindow: Window;
+  try {
+    // biome-ignore lint/suspicious/noExplicitAny: 非標準
+    const win = window as any;
+    pipWindow = await win.documentPictureInPicture.requestWindow({
+      width: el.clientWidth / 2,
+      height: el.clientHeight / 2,
+    });
+  } catch (error) {
+    console.error('[nicopip]', error);
+    dummyElement.remove();
+    parent.append(el);
+    alert(
+      '[nicopip] Document Picture-in-Picture の初期化に失敗しました。\n何度やってもダメだったら nicopip の設定から canvas 版に戻してみてください。',
+    );
+    return;
+  }
+
   pipWindow.addEventListener('unload', () => {
     parent.append(el);
     dummyElement.remove();
