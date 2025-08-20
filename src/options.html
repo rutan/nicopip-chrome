@@ -15,7 +15,7 @@
     <ul class="config-list">
       <li class="config-item">
         <label>
-          <input type="radio" name="nicoVideo" value="disabled" id="nicoVideo-disabled">
+          <input type="radio" name="nicoVideo" value="disabled">
           <div class="config-item-content">
             <div class="config-item-title">無効</div>
             <div class="config-item-description">Picture in Picture を利用しません。</div>
@@ -24,10 +24,22 @@
       </li>
       <li class="config-item">
         <label>
-          <input type="radio" name="nicoVideo" value="canvas" id="nicoVideo-canvas">
+          <input type="radio" name="nicoVideo" value="canvas">
           <div class="config-item-content">
             <div class="config-item-title">Canvas版</div>
             <div class="config-item-description">動画とコメントを合成した Picture in Picture を利用します。</div>
+          </div>
+        </label>
+      </li>
+      <li class="config-item">
+        <label>
+          <input type="radio" name="nicoVideo" value="document">
+          <div class="config-item-content">
+            <div class="config-item-title">Document Picture-in-Picture版（テスト）</div>
+            <div class="config-item-description">
+              ブラウザの機能でプレーヤーを直接 Picture in Picture にします。<br />
+              軽いけど、表示はちょっと特殊です。動かなかったら Canvas 版に戻してね。
+            </div>
           </div>
         </label>
       </li>
@@ -39,7 +51,7 @@
     <ul class="config-list">
       <li class="config-item">
         <label>
-          <input type="radio" name="nicoLive" value="disabled" id="nicoLive-disabled">
+          <input type="radio" name="nicoLive" value="disabled">
           <div class="config-item-content">
             <div class="config-item-title">無効</div>
             <div class="config-item-description">Picture in Picture を利用しません。</div>
@@ -48,7 +60,7 @@
       </li>
       <li class="config-item">
         <label>
-          <input type="radio" name="nicoLive" value="canvas" id="nicoLive-canvas">
+          <input type="radio" name="nicoLive" value="canvas">
           <div class="config-item-content">
             <div class="config-item-title">Canvas版</div>
             <div class="config-item-description">動画とコメントを合成した Picture in Picture を利用します。</div>

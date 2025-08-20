@@ -11,7 +11,12 @@ import { routeNicoLive, routeNicoVideo } from './routes';
   const router = createRouter();
 
   if (settings.nicoVideo !== 'disabled') {
-    router.define('https://www.nicovideo.jp/watch/:id', routeNicoVideo);
+    const mode = settings.nicoVideo;
+    router.define('https://www.nicovideo.jp/watch/:id', () => {
+      routeNicoVideo({
+        mode,
+      });
+    });
   }
 
   if (settings.nicoLive !== 'disabled') {

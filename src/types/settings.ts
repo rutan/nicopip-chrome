@@ -1,4 +1,4 @@
-export type PipMode = 'disabled' | 'canvas';
+export type PipMode = 'disabled' | 'canvas' | 'document';
 
 export interface Settings {
   nicoVideo: PipMode;
