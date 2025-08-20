@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "nicopip",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "【非公式】ニコニコ動画・ニコニコ生放送をPinPで再生します",
   "author": "ru_shalm <ru_shalm@hazimu.com>",
   "license": "MIT",
