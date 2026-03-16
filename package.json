@@ -14,22 +14,19 @@
     "lint:biome": "biome check .",
     "format": "biome check --write .",
     "zip": "run-s format build zip:*",
-    "zip:zipping": "deployment-zip -c .deployment-zip.ts ./dist",
-    "prepare": "husky",
-    "pre-commit": "run-s lint"
+    "zip:zipping": "deployment-zip -c .deployment-zip.ts ./dist"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
-    "@crxjs/vite-plugin": "^2.2.0",
-    "@rutan/deployment-zip": "^0.5.0",
-    "@types/chrome": "^0.1.4",
-    "@types/dom-navigation": "^1.0.6",
-    "@types/node": "^24.3.0",
-    "cross-env": "^10.0.0",
-    "husky": "^9.1.7",
+    "@crxjs/vite-plugin": "^2.4.0",
+    "@rutan/deployment-zip": "^0.6.0",
+    "@types/chrome": "^0.1.37",
+    "@types/dom-navigation": "^1.0.7",
+    "@types/node": "^25.5.0",
+    "cross-env": "^10.1.0",
     "npm-run-all2": "^8.0.4",
-    "typescript": "^5.9.2",
-    "vite": "^7.1.11"
+    "typescript": "^5.9.3",
+    "vite": "^8.0.0"
   },
-  "packageManager": "pnpm@10.14.0"
+  "packageManager": "pnpm@10.32.1"
 }
