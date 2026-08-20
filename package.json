@@ -1,23 +1,25 @@
 {
-  "type": "module",
   "name": "nicopip",
   "version": "1.9.0",
   "description": "【非公式】ニコニコ動画・ニコニコ生放送をPinPで再生します",
-  "author": "ru_shalm <ru_shalm@hazimu.com>",
   "license": "MIT",
+  "author": "ru_shalm <ru_shalm@hazimu.com>",
+  "type": "module",
   "scripts": {
     "build": "run-s build:*",
     "build:vite": "cross-env NODE_ENV=production vite build",
     "dev": "vite",
     "lint": "run-s lint:*",
-    "lint:tsc": "tsc --noEmit",
-    "lint:biome": "biome check .",
-    "format": "biome check --write .",
+    "lint:oxfmt": "oxfmt --check .",
+    "lint:oxlint": "oxlint .",
+    "lint:tsc": "tsc",
+    "format": "run-s format:*",
+    "format:oxfmt": "oxfmt --write .",
+    "format:oxlint": "oxlint --fix .",
     "zip": "run-s format build zip:*",
     "zip:zipping": "deployment-zip -c .deployment-zip.ts ./dist"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.0",
     "@crxjs/vite-plugin": "^2.4.0",
     "@rutan/deployment-zip": "^0.6.0",
     "@types/chrome": "^0.1.37",
@@ -25,7 +27,10 @@
     "@types/node": "^25.5.0",
     "cross-env": "^10.1.0",
     "npm-run-all2": "^8.0.4",
-    "typescript": "^5.9.3",
+    "oxfmt": "^0.63.0",
+    "oxlint": "^1.78.0",
+    "oxlint-tsgolint": "^7.0.2001",
+    "typescript": "^7.0.2",
     "vite": "^8.0.5"
   },
   "packageManager": "pnpm@10.32.1"

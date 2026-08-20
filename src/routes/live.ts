@@ -21,9 +21,7 @@ async function setupNicoLive() {
     selector: TARGET_BUTTON_SELECTOR,
   });
   if (!baseButton) {
-    console.log(
-      '[nicopip] ボタンが見つからなかったため処理を中断します。ページ構成が変更された可能性があります。',
-    );
+    console.log('[nicopip] ボタンが見つからなかったため処理を中断します。ページ構成が変更された可能性があります。');
     return;
   }
 

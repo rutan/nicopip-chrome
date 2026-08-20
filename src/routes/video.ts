@@ -23,9 +23,7 @@ async function setupNicoVideo({ mode }: routeNicoVideoParams) {
     selector: TARGET_BUTTON_SELECTOR,
   });
   if (!baseButton) {
-    console.log(
-      '[nicopip] ボタンが見つからなかったため処理を中断します。ページ構成が変更された可能性があります。',
-    );
+    console.log('[nicopip] ボタンが見つからなかったため処理を中断します。ページ構成が変更された可能性があります。');
     return;
   }
 
@@ -50,17 +48,11 @@ async function setupNicoVideo({ mode }: routeNicoVideoParams) {
   // PinPボタンのアイコンを設定
   const originalSvg = button.querySelector('svg');
   if (originalSvg) {
-    originalSvg.classList.add(
-      'fill_icon.watchControllerBase',
-      'hover:fill_icon.watchControllerHover',
-    );
+    originalSvg.classList.add('fill_icon.watchControllerBase', 'hover:fill_icon.watchControllerHover');
     originalSvg.classList.remove('fill_icon.watchControllerDisabled');
 
     button.innerHTML = PictureInPictureIcon;
-    button.children[0].setAttribute(
-      'class',
-      originalSvg.getAttribute('class') ?? '',
-    );
+    button.children[0].setAttribute('class', originalSvg.getAttribute('class') ?? '');
   }
 
   // ボタン消去の監視
@@ -75,9 +67,7 @@ async function openDocumentPictureInPicture() {
   const el = document.querySelector('[data-name="stage"]');
   const parent = el?.parentElement;
   if (!el || !parent) {
-    alert(
-      '[nicopip] プレーヤーのHTMLが見つからなかった、ニコ動の仕様変わったかも＞＜',
-    );
+    alert('[nicopip] プレーヤーのHTMLが見つからなかった、ニコ動の仕様変わったかも＞＜');
     return;
   }
 
@@ -127,9 +117,7 @@ async function openDocumentPictureInPicture() {
   cover.style.width = '100%';
   cover.style.height = '100%';
   cover.addEventListener('click', () => {
-    const playButton = document.querySelector<HTMLElement>(
-      '[aria-label="再生する"],[aria-label="一時停止する"]',
-    );
+    const playButton = document.querySelector<HTMLElement>('[aria-label="再生する"],[aria-label="一時停止する"]');
     playButton?.click();
   });
   wrapper.append(cover);

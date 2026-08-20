@@ -23,20 +23,14 @@ export default defineConfig({
         permissions: ['storage'],
         content_scripts: [
           {
-            matches: [
-              'https://www.nicovideo.jp/*',
-              'https://live.nicovideo.jp/watch/*',
-            ],
+            matches: ['https://www.nicovideo.jp/*', 'https://live.nicovideo.jp/watch/*'],
             js: ['src/contentScript.ts'],
           },
         ],
         web_accessible_resources: [
           {
             resources: [],
-            matches: [
-              'https://www.nicovideo.jp/*',
-              'https://live.nicovideo.jp/*',
-            ],
+            matches: ['https://www.nicovideo.jp/*', 'https://live.nicovideo.jp/*'],
           },
         ],
       }),

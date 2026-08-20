@@ -49,12 +49,7 @@ function nextCall(func: () => void) {
   }
 }
 
-function calcSize(
-  srcWidth: number,
-  srcHeight: number,
-  dstWidth: number,
-  dstHeight: number,
-) {
+function calcSize(srcWidth: number, srcHeight: number, dstWidth: number, dstHeight: number) {
   const wr = dstWidth / srcWidth;
   const hr = dstHeight / srcHeight;
   const rate = Math.min(wr, hr);
@@ -66,21 +61,12 @@ function calcSize(
 
 export function handleVideo(): void {
   const myId = ++uid;
-  const comment = document.querySelector<HTMLCanvasElement>(
-    COMMENT_CANVAS_TAG_SELECTOR,
-  );
-  const targetVideo =
-    document.querySelector<HTMLVideoElement>(VIDEO_TAG_SELECTOR);
-  const supporterView = document.querySelector<HTMLDivElement>(
-    SUPPORTER_VIEW_SELECTOR,
-  );
-  const supporterCanvas = document.querySelector<HTMLCanvasElement>(
-    SUPPORTER_VIEW_CANVAS_SELECTOR,
-  );
+  const comment = document.querySelector<HTMLCanvasElement>(COMMENT_CANVAS_TAG_SELECTOR);
+  const targetVideo = document.querySelector<HTMLVideoElement>(VIDEO_TAG_SELECTOR);
+  const supporterView = document.querySelector<HTMLDivElement>(SUPPORTER_VIEW_SELECTOR);
+  const supporterCanvas = document.querySelector<HTMLCanvasElement>(SUPPORTER_VIEW_CANVAS_SELECTOR);
 
-  let akashicCanvas = document.querySelector<HTMLCanvasElement>(
-    AKASHIC_CANVAS_SELECTOR,
-  );
+  let akashicCanvas = document.querySelector<HTMLCanvasElement>(AKASHIC_CANVAS_SELECTOR);
   const akashicCanvasContext = akashicCanvas?.getContext('2d');
 
   function update() {
@@ -103,12 +89,7 @@ export function handleVideo(): void {
       context.fillRect(0, 0, canvas.width, canvas.height);
 
       // video
-      const videoSize = calcSize(
-        targetVideo.videoWidth,
-        targetVideo.videoHeight,
-        canvas.width,
-        canvas.height,
-      );
+      const videoSize = calcSize(targetVideo.videoWidth, targetVideo.videoHeight, canvas.width, canvas.height);
       context.drawImage(
         targetVideo,
         0,
@@ -127,12 +108,7 @@ export function handleVideo(): void {
         supporterView?.style.opacity !== '0' &&
         supporterCanvas
       ) {
-        const supporterSize = calcSize(
-          supporterCanvas.width,
-          supporterCanvas.height,
-          canvas.width,
-          canvas.height,
-        );
+        const supporterSize = calcSize(supporterCanvas.width, supporterCanvas.height, canvas.width, canvas.height);
         context.drawImage(
           supporterCanvas,
           0,
@@ -152,12 +128,7 @@ export function handleVideo(): void {
           // 外部リソースの読み込みによって canvas が汚染されていないかを確認
           akashicCanvasContext?.getImageData(0, 0, 1, 1);
 
-          const size = calcSize(
-            akashicCanvas.width,
-            akashicCanvas.height,
-            canvas.width,
-            canvas.height,
-          );
+          const size = calcSize(akashicCanvas.width, akashicCanvas.height, canvas.width, canvas.height);
           context.drawImage(
             akashicCanvas,
             0,
@@ -178,12 +149,7 @@ export function handleVideo(): void {
 
       // comment
       if (comment) {
-        const commentSize = calcSize(
-          comment.width,
-          comment.height,
-          canvas.width,
-          canvas.height,
-        );
+        const commentSize = calcSize(comment.width, comment.height, canvas.width, canvas.height);
         context.drawImage(
           comment,
           0,
