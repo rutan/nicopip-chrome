@@ -20,18 +20,18 @@
     "zip:zipping": "deployment-zip -c .deployment-zip.ts ./dist"
   },
   "devDependencies": {
-    "@crxjs/vite-plugin": "^2.4.0",
-    "@rutan/deployment-zip": "^0.6.0",
-    "@types/chrome": "^0.1.37",
+    "@crxjs/vite-plugin": "^2.7.1",
+    "@rutan/deployment-zip": "^0.7.1",
+    "@types/chrome": "^0.2.6",
     "@types/dom-navigation": "^1.0.7",
-    "@types/node": "^25.5.0",
+    "@types/node": "^26.2.0",
     "cross-env": "^10.1.0",
-    "npm-run-all2": "^8.0.4",
-    "oxfmt": "^0.63.0",
-    "oxlint": "^1.78.0",
+    "npm-run-all2": "^9.0.3",
+    "oxfmt": "^0.64.0",
+    "oxlint": "^1.79.0",
     "oxlint-tsgolint": "^7.0.2001",
     "typescript": "^7.0.2",
-    "vite": "^8.0.5"
+    "vite": "^8.2.2"
   },
-  "packageManager": "pnpm@10.32.1"
+  "packageManager": "pnpm@11.22.0"
 }
