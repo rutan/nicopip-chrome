@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "arrowParens": "always",
+  "printWidth": 120,
+  "singleQuote": true,
+  "experimentalSortImports": {
+    "order": "asc",
+    "groups": [["builtin"], ["external"], ["internal"], ["parent"], ["sibling"], ["index"]],
+    "internalPattern": ["$"],
+    "newlinesBetween": false
+  },
+  "ignorePatterns": ["pnpm-*.yaml"]
+}

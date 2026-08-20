@@ -1,12 +1,8 @@
 import { getSettings, saveSettings } from './functions';
 import type { PipMode, Settings } from './types/settings';
 
-const nicoVideoRadios = document.querySelectorAll<HTMLInputElement>(
-  'input[name="nicoVideo"]',
-);
-const nicoLiveRadios = document.querySelectorAll<HTMLInputElement>(
-  'input[name="nicoLive"]',
-);
+const nicoVideoRadios = document.querySelectorAll<HTMLInputElement>('input[name="nicoVideo"]');
+const nicoLiveRadios = document.querySelectorAll<HTMLInputElement>('input[name="nicoLive"]');
 const saveStatus = document.getElementById('saveStatus') as HTMLDivElement;
 
 async function loadSettings() {
@@ -55,12 +51,8 @@ function showSaveStatus(success: boolean) {
 }
 
 async function handleSettingChange() {
-  const nicoVideoValue = document.querySelector<HTMLInputElement>(
-    'input[name="nicoVideo"]:checked',
-  )?.value as PipMode;
-  const nicoLiveValue = document.querySelector<HTMLInputElement>(
-    'input[name="nicoLive"]:checked',
-  )?.value as PipMode;
+  const nicoVideoValue = document.querySelector<HTMLInputElement>('input[name="nicoVideo"]:checked')?.value as PipMode;
+  const nicoLiveValue = document.querySelector<HTMLInputElement>('input[name="nicoLive"]:checked')?.value as PipMode;
 
   const settings: Settings = {
     nicoVideo: nicoVideoValue || 'canvas',

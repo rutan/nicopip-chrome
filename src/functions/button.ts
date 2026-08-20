@@ -1,10 +1,4 @@
-export function copyButton({
-  srcButton,
-  onClick,
-}: {
-  srcButton: HTMLElement;
-  onClick: () => void;
-}) {
+export function copyButton({ srcButton, onClick }: { srcButton: HTMLElement; onClick: () => void }) {
   const cloneButton = srcButton.cloneNode(true) as HTMLElement;
 
   cloneButton.id = '';
@@ -39,9 +33,7 @@ export async function searchBaseButton({
 
     ++count;
     if (count > retryCount) {
-      console.log(
-        '[nicopip] ページ内からボタンを検知できなかったため終了します',
-      );
+      console.log('[nicopip] ページ内からボタンを検知できなかったため終了します');
       return null;
     }
 
@@ -50,10 +42,7 @@ export async function searchBaseButton({
   }
 }
 
-export async function observeMissingButton(
-  button: HTMLElement,
-  callback: () => void,
-) {
+export async function observeMissingButton(button: HTMLElement, callback: () => void) {
   const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
       if (mutation.type !== 'childList') return;
