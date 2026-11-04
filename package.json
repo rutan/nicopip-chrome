@@ -22,16 +22,16 @@
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.7.1",
     "@rutan/deployment-zip": "^0.7.1",
-    "@types/chrome": "^0.2.6",
+    "@types/chrome": "^0.2.9",
     "@types/dom-navigation": "^1.0.7",
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.6.6",
     "cross-env": "^10.1.0",
-    "npm-run-all2": "^9.0.3",
+    "npm-run-all2": "^9.0.4",
     "oxfmt": "^0.64.0",
-    "oxlint": "^1.79.0",
-    "oxlint-tsgolint": "^7.0.2001",
+    "oxlint": "^1.90.0",
+    "oxlint-tsgolint": "^7.0.2005",
     "typescript": "^7.0.2",
-    "vite": "^8.2.2"
+    "vite": "^8.3.5"
   },
   "packageManager": "pnpm@11.22.0"
 }
